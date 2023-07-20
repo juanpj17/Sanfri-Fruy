@@ -12,6 +12,12 @@ import CatalogoClienteView from '@/views/CatalogoClienteView.vue'
 import CrearProductoView from '@/views/CrearProductoView.vue'
 import CatalogoAdmView from '@/views/CatalogoAdmView.vue'
 import ConsultarAlmacenView from '@/views/ConsultarAlmacenView.vue'
+import ModificarProductoView from '@/views/ModificarProductoView.vue'
+import ModificarPerfilView from '@/views/ModificarPerfilView.vue'
+import CarritoView from '@/views/CarritoView.vue'
+import EnvioView from '@/views/EnvioView.vue'
+import PagoView from '@/views/PagoView.vue'
+import ConsultarPedidosView from '@/views/ConsultarPedidosView.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -46,6 +52,11 @@ const routes = [
     component: ConsultarPerfilView
   },
   {
+    path: '/ModificarPerfilView/:email',
+    name: 'ModificarPerfilView',
+    component: ModificarPerfilView 
+  },
+  {
     path: '/AdministradorHomeView',
     name: 'AdministradorHomeView',
     component: AdministradorHomeView
@@ -66,6 +77,11 @@ const routes = [
     component: CrearProductoView 
   },
   {
+    path: '/ModificarProductoView/:id',
+    name: 'ModificarProductoView',
+    component: ModificarProductoView 
+  },
+  {
     path: '/CatalogoAdmView',
     name: 'CatalogoAdmView',
     component: CatalogoAdmView
@@ -75,7 +91,26 @@ const routes = [
     name: 'ConsultarAlmacenView',
     component: ConsultarAlmacenView
   },
-
+  {
+    path: '/CarritoView/:email',
+    name: 'CarritoView',
+    component: CarritoView
+  },
+  {
+    path: '/EnvioView/:email',
+    name: 'EnvioView',
+    component: EnvioView
+  },
+  {
+    path: '/PagoView/:email',
+    name: 'PagoView',
+    component: PagoView
+  },
+  {
+    path: '/ConsultarPedidosView',
+    name: 'ConsultarPedidos',
+    component: ConsultarPedidosView
+  },
   
 ]
 

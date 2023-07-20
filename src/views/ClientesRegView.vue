@@ -7,7 +7,6 @@
 <script>
 // @ is an alias to /src
 import EncabezadoAdmCom from '@/components/EncabezadoAdmCom.vue'
-import TablaClientesComp from '@/components/TablaClientesComp.vue';
 import TablaClientesCompleta from '@/components/TablaClientesCompleta.vue';
 
 

@@ -1,46 +1,89 @@
 <template>
-    <div>
-        <b-navbar toggleable=""  variant="light">
-          <b-navbar-brand href="#">
-            <img src="@/assets/LogoProyecto.jpg" class="d-inline-block align-top" alt="Kitten" style="margin-left: 30px;">
-          </b-navbar-brand>
-      
-          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-      
-          <b-collapse id="nav-collapse" is-nav>
-            <b-navbar-nav >
-              <b-nav-item  style="margin-left: 50px; margin-right: 50px; "><b-button variant="light" v-on:click="Home"><h4>INICIO</h4></b-button></b-nav-item>
-              <b-nav-item style="margin-left: 50px; margin-right: 50px; "><b-button variant="light" v-on:click="Catalogo"><h4>CATALOGO</h4></b-button></b-nav-item>
-              <b-nav-item style="margin-left: 50px; margin-right: 50px; "><b-button variant="light"><h4><b-icon icon="cart4"></b-icon> CARRITO</h4></b-button></b-nav-item>
-              <b-nav-item  style="margin-left: 90px; margin-right: 90px; font-size: 30px; font-family: Georgia, 'Times New Roman', Times, serif;"><h3 >                                                                             </h3></b-nav-item>
-              <b-nav-item  style="margin-left: 90px; margin-right: 90px; font-size: 30px; font-family: Georgia, 'Times New Roman', Times, serif;"><h3 >                                                                             </h3></b-nav-item>
-              <b-nav-item  style="margin-left: 90px; margin-right: 90px; font-size: 30px; font-family: Georgia, 'Times New Roman', Times, serif;"><h3 >                                                                             </h3></b-nav-item>
-              <b-nav-item  style="margin-left: 90px; margin-right: 90px; font-size: 30px; font-family: Georgia, 'Times New Roman', Times, serif;"><h3 >                                                                             </h3></b-nav-item>
-              <b-nav-item  style="margin-left: 30px; margin-right: 30px; font-size: 30px; font-family: Georgia, 'Times New Roman', Times, serif;"><h3 >                                                                             </h3></b-nav-item>
-              <b-nav-item  style="margin-left: 40px; margin-right: 40px; font-size: 30px;"><h2><b-dropdown class="mx-1 letra" right text="Perfil" size="lg" variant="light"> <b-dropdown-item  v-on:click="verPerfil"> <b-avatar variant="light"></b-avatar>Ver perfil</b-dropdown-item> </b-dropdown></h2> </b-nav-item>
-              <b-nav-item  style="margin-left: 40px; margin-right: 40px; "><b-button variant="light" v-on:click="CerrarSesion"><h4>Cerrar sesion</h4></b-button></b-nav-item>
-              
-            </b-navbar-nav>
-          
-          
-        </b-collapse>
-        
-        
-        </b-navbar>
-        
-      </div>
-    </template> 
+  <div class="principalCont">
+    <b-navbar toggleable="sm" variant="light">
+      <b-navbar-brand href="#">
+        <img src="@/assets/LogoProyecto.jpg" class="d-inline-block align-top" alt="Kitten" style="margin-left: 30px;">
+      </b-navbar-brand>
 
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav class="m-auto">
+          <b-nav-item>
+            <b-button variant="light" v-on:click="Home"><h4>INICIO</h4></b-button>
+          </b-nav-item>
+          <b-nav-item>
+            <b-dropdown right text="CATALOGO" size="lg" variant="light">
+              <template #button-content>
+                <h2 class="letra-grande">CATALOGO</h2>
+              </template>
+              <b-dropdown-item v-on:click="Catalogo">Ver catalogo</b-dropdown-item>
+            </b-dropdown>
+          </b-nav-item>
+          <b-nav-item>
+            <b-button variant="light" v-on:click="Carrito"><h4><b-icon icon="cart4"></b-icon> CARRITO</h4></b-button>
+          </b-nav-item> 
+          <b-nav-item>
+            <b-dropdown right text="CLIENTES" size="lg" variant="light">
+              <template #button-content>
+                <h2 class="letra-grande">PERFIL</h2>
+              </template>
+              <b-dropdown-item v-on:click="verPerfil">Ver Perfil</b-dropdown-item>
+              <b-dropdown-item v-on:click="modificarPerfil">Modificar Perfil</b-dropdown-item>
+            </b-dropdown>
+          </b-nav-item>
+          <b-nav-item>
+            <b-button variant="light" v-on:click="CerrarSesion"><h4>Cerrar sesion</h4></b-button>
+          </b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+  </div>
+</template>
 <script>
 export default{
     props:{
         Perfil:'',
     },
+
+    data(){
+        return{
+            Clientes:[],
+            Productos:[],
+            Pedidos:[],
+        }
+    },
+
+    created(){               
+        this.ProbarConexionClientes();
+        this.ProbarConexionProductos();
+    },
+    
+
     methods:{
-      verPerfil(){
+
+    Carrito(){
+        if (this.$route.path!='/CarritoView/'+this.Perfil)
+        {if(this.Productos.length!==0)
+          this.$router.push('/CarritoView/'+this.Perfil);
+          else
+          this.MensajeError();
+        }
+    },
+
+    verPerfil(){
         if (this.$route.path!='/ConsultarPerfilView/'+this.Perfil)
         {if(this.Clientes.length!==0)
           this.$router.push('/ConsultarPerfilView/'+this.Perfil);
+          else
+          this.MensajeError();
+        }
+      },
+
+      modificarPerfil(){
+        if (this.$route.path!='/ModificarPerfilView' + this.Perfil)
+        {if(this.Clientes.length!==0)
+          this.$router.push('/ModificarPerfilView/' + this.Perfil);
           else
           this.MensajeError();
         }
@@ -81,17 +124,7 @@ export default{
               text: 'Tenemos problemas para conectarnos con el servidor, por favor intentelo mas tarde',})
         },
     },
-    data(){
-      return{
-        Clientes:[],
-        Productos:[],
-      }
-    },
-    created(){               
-      this.ProbarConexionClientes();
-      this.ProbarConexionProductos();
-       },
-    
+
     
 }
  </script>
@@ -104,8 +137,8 @@ export default{
  h4{
   font-family: 'Nunito', sans-serif;
  }
- .letra{
-  font-size: 40px;
+ .letra-grande{
+  font-size: 22px;
  }
  
 </style>

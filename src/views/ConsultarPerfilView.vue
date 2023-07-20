@@ -8,8 +8,6 @@
 import EncabezadoClintComp from '@/components/EncabezadoClintComp.vue';
 import ConsultarPerfilCompVue from '@/components/ConsultarPerfilComp.vue';
 export default{
-    components:{ EncabezadoClintComp, ConsultarPerfilCompVue
-        
-    }
+    components:{ EncabezadoClintComp, ConsultarPerfilCompVue }
 }
 </script>

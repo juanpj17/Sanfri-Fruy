@@ -31,13 +31,6 @@
             </div>
             <hr>
             <div class="form-floating mb-3">
-                <label><h5>Password</h5></label>
-                <br>
-                <br>
-                <h4>{{ this.password }}</h4>
-            </div>
-            <hr>
-            <div class="form-floating mb-3">
                   <label><h5>Estado</h5></label>
                   <br>
                   <br>
@@ -51,6 +44,7 @@
                   <h4>{{ this.direccion }}</h4>
             </div>
             <hr>
+            <button @click="eliminar(Cliente[0].id)" class="btn btn-danger">Eliminar mi cuenta</button>
         </div>
     </div>
     </div>
@@ -59,7 +53,10 @@
 </section>
 </template>
 
-   <script>
+<script>
+
+
+
    export default{
     props:{
         Perfil:'',
@@ -84,8 +81,7 @@
             url=url+this.Perfil;
             this.axios.get(url)
               .then(response =>{
-                this.Cliente = response.data;
-                console.log(this.Cliente) ; 
+                this.Cliente = response.data; 
                 this.nombreCompleto	=this.Cliente[0].nombreCompleto;
                 this.docIdentidad=this.Cliente[0].tipDoc +'-'+this.Cliente[0].numDoc;
                 this.email=this.Cliente[0].email ; 
@@ -93,9 +89,39 @@
                 this.estado=this.Cliente[0].estado;
                 this.direccion=this.Cliente[0].direccion;          
               })
-        }
-    }
+        },
 
+        eliminar(id){
+            console.log(id);
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "No podrás revertir esta acción!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const url = 'http://localhost:3000/api/clientes/' + id;
+                    this.axios.delete(url)
+                        .catch( error => {
+                            console.log(error);
+                        })
+                    Swal.fire(
+                        'Eliminado!',
+                        'Tu perfil ha sido eliminado.',
+                        'success'
+                    ).then(() => {
+                        this.$router.push('/')
+                    })
+                }
+            })
+                
+        },
+
+    }
 
    }
     

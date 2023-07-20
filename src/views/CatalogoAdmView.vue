@@ -1,17 +1,17 @@
 <template>
     <div>
         <EncabezadoAdmComVue></EncabezadoAdmComVue>
-        <CatalogoCompVue :ClienteRegistrado="true"></CatalogoCompVue>
+        <CatalogoAdminCompVue :ClienteRegistrado="true"></CatalogoAdminCompVue>
     </div>
 </template>
 
 <script>
-import CatalogoCompVue from "../components/CatalogoComp.vue";
-import EncabezadoAdmComVue from '../components/EncabezadoAdmCom.vue';
+    import CatalogoAdminCompVue from "../components/CatalogoAdminComp.vue";
+    import EncabezadoAdmComVue from '../components/EncabezadoAdmCom.vue';
 
 export default{
     components:{
-        CatalogoCompVue,EncabezadoAdmComVue
+        CatalogoAdminCompVue,EncabezadoAdmComVue
     }
 }
 </script>

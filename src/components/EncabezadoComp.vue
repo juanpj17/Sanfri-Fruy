@@ -1,38 +1,36 @@
 <template>
-    <div>
-        <b-navbar toggleable=""  variant="light" class="sticky-top" >
-          <b-navbar-brand href="#">
-            <img src="@/assets/LogoProyecto.jpg" class="d-inline-block align-top" alt="Kitten" style="margin-left: 30px;">
-          </b-navbar-brand>
-      
-          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-      
-          <b-collapse id="nav-collapse" is-nav>
-            <b-navbar-nav >
-              <b-nav-item  style="margin-left: 50px; margin-right: 50px; "><b-button variant="light" v-on:click="Home"><h4>INICIO</h4></b-button></b-nav-item>
-              <b-nav-item style="margin-left: 50px; margin-right: 50px; "><b-button variant="light" v-on:click="Catalogo"><h4>CATALOGO</h4></b-button></b-nav-item>
-              <b-nav-item style="margin-left: 50px; margin-right: 50px; "><b-button variant="light"><h4><b-icon icon="cart4"></b-icon> CARRITO</h4></b-button></b-nav-item>
-              <b-nav-item  style="margin-left: 90px; margin-right: 90px; font-size: 30px; font-family: Georgia, 'Times New Roman', Times, serif;"><h3 >                                                                             </h3></b-nav-item>
-              <b-nav-item  style="margin-left: 90px; margin-right: 90px; font-size: 30px; font-family: Georgia, 'Times New Roman', Times, serif;"><h3 >                                                                             </h3></b-nav-item>
-              <b-nav-item  style="margin-left: 90px; margin-right: 90px; font-size: 30px; font-family: Georgia, 'Times New Roman', Times, serif;"><h3 >                                                                             </h3></b-nav-item>
-              <b-nav-item  style="margin-left: 90px; margin-right: 90px; font-size: 30px; font-family: Georgia, 'Times New Roman', Times, serif;"><h3 >                                                                             </h3></b-nav-item>
-              <b-nav-item style="margin-left: 50px; margin-right: 50px; "><b-button variant="light" v-on:click="IniciarSesion"><h4>Iniciar Sesion</h4></b-button></b-nav-item>
-              <b-nav-item style="margin-left: 50px; margin-right: 50px; "><b-button variant="light" v-on:click="RegistroUsusario"><h4>Registrarse</h4></b-button></b-nav-item>
-             
-            </b-navbar-nav>
-          
-            
-    
-              
-                
-          
-        </b-collapse>
-        
-        
-        </b-navbar>
-        
-      </div>
-    </template> 
+  <div class="principalCont">
+    <b-navbar toggleable="sm" variant="light" class="navbar-expand-sm">
+      <b-navbar-brand href="#">
+        <img src="@/assets/LogoProyecto.jpg" class="d-inline-block align-top" alt="Kitten" style="margin-left: 30px;">
+      </b-navbar-brand>
+
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav class="mx-auto">
+          <b-nav-item>
+            <b-button variant="light" v-on:click="Home"><h4>INICIO</h4></b-button>
+          </b-nav-item>
+          <b-nav-item>
+            <b-button variant="light" v-on:click="Catalogo"><h4>CATALOGO</h4></b-button>
+          </b-nav-item>
+          <b-nav-item>
+            <b-button variant="light"><h4><b-icon icon="cart4"></b-icon> CARRITO</h4></b-button>
+          </b-nav-item>
+          <b-nav-item>
+            <b-button variant="light" v-on:click="IniciarSesion"><h4>Iniciar Sesion</h4></b-button>
+          </b-nav-item>
+          <b-nav-item>
+            <b-button variant="light" v-on:click="RegistroUsusario"><h4>Registrarse</h4></b-button>
+          </b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+  </div>
+</template>
+
+
     <script>
 export default{
     methods:{

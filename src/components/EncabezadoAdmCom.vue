@@ -1,33 +1,60 @@
 <template>
-    <div class="principalCont">
-        <b-navbar toggleable="sm"  variant="light">
-          <b-navbar-brand href="#">
-            <img src="@/assets/LogoProyecto.jpg" class="d-inline-block align-top" alt="Kitten" style="margin-left: 30px;">
+  <div class="principalCont">
+    <b-navbar toggleable="sm" variant="light">
+      <b-navbar-brand href="#">
+        <img src="@/assets/LogoProyecto.jpg" class="d-inline-block align-top" alt="Kitten" style="margin-left: 30px;">
+      </b-navbar-brand>
 
-            
-          </b-navbar-brand>
-      
-          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-      
-          <b-collapse id="nav-collapse" is-nav>
-            <b-navbar-nav >
-              <b-nav-item  style="margin-left: 50px; margin-right: 50px; "><b-button variant="light"  v-on:click="Home"><h4>INICIO</h4></b-button></b-nav-item>
-              <b-nav-item style="margin-left: 50px; margin-right: 50px; font-size: 30px; color: black;" >
-              <h2><b-dropdown class="mx-1 letra" right text="CATALOGO" size="lg" variant="light" ><b-dropdown-item v-on:click="Catalogo">Ver catalogo</b-dropdown-item><b-dropdown-item v-on:click="CrearProducto">Crear producto</b-dropdown-item></b-dropdown></h2></b-nav-item>
-              <b-nav-item style="margin-left: 50px; margin-right: 50px; font-size: 30px;"><h2><b-dropdown class="mx-1 letra" right text="AlMACEN" size="lg" variant="light"> <b-dropdown-item v-on:click="ConsultarAlmacen">Ver almacen</b-dropdown-item> </b-dropdown> </h2> </b-nav-item>
-              <b-nav-item  style="margin-left: 50px; margin-right: 50px; font-size: 30px;"><h2><b-dropdown class="mx-1 letra" right text="CLIENTES" size="lg" variant="light"> <b-dropdown-item v-on:click="ConsultarCliente">Consultar clientes</b-dropdown-item> </b-dropdown> </h2> </b-nav-item>
-              <b-nav-item  style="margin-left: 100px; margin-right: 100px; "><b-button variant="light" ><h4></h4></b-button></b-nav-item>
-              <b-nav-item  style="margin-left: 100px; margin-right: 100px; "><b-button variant="light" ><h4></h4></b-button></b-nav-item>
-              <b-nav-item  style="margin-left: 100px; margin-right: 100px; "><b-button variant="light"  ><h4></h4></b-button></b-nav-item>
-              <b-nav-item  style="margin-left: 80px; margin-right: 90px; "><b-button variant="light"  v-on:click=" CerrarSesion"><h4>Cerrar sesion</h4></b-button></b-nav-item>
-            </b-navbar-nav>
-          </b-collapse>
-        
-        
-        </b-navbar>
-        
-      </div>
-    </template> 
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav class="m-auto">
+          <b-nav-item>
+            <b-button variant="light" v-on:click="Home"><h4>INICIO</h4></b-button>
+          </b-nav-item>
+          <b-nav-item>
+            <b-dropdown right text="CATALOGO" size="lg" variant="light">
+              <template #button-content>
+                <h2 class="letra-grande">CATALOGO</h2>
+              </template>
+              <b-dropdown-item v-on:click="Catalogo">Ver catalogo</b-dropdown-item>
+              <b-dropdown-item v-on:click="CrearProducto">Crear producto</b-dropdown-item>
+            </b-dropdown>
+          </b-nav-item>
+          <b-nav-item>
+            <b-dropdown right text="ALMACEN" size="lg" variant="light">
+              <template #button-content>
+                <h2 class="letra-grande">ALMACEN</h2>
+              </template>
+              <b-dropdown-item v-on:click="ConsultarAlmacen">Ver almacen</b-dropdown-item>
+            </b-dropdown>
+          </b-nav-item>
+          <b-nav-item>
+            <b-dropdown right text="PEDIDOS" size="lg" variant="light">
+              <template #button-content>
+                <h2 class="letra-grande">PEDIDOS</h2>
+              </template>
+              <b-dropdown-item v-on:click="ConsultarPedidos">Ver pedidos</b-dropdown-item>
+            </b-dropdown>
+          </b-nav-item>
+          <b-nav-item>
+            <b-dropdown right text="CLIENTES" size="lg" variant="light">
+              <template #button-content>
+                <h2 class="letra-grande">CLIENTES</h2>
+              </template>
+              <b-dropdown-item v-on:click="ConsultarCliente">Consultar clientes</b-dropdown-item>
+            </b-dropdown>
+          </b-nav-item>
+          <b-nav-item>
+            <b-button variant="light" v-on:click="CerrarSesion"><h4>Cerrar sesion</h4></b-button>
+          </b-nav-item>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+  </div>
+</template>
+
+
     <script>
 export default{
     methods:{
@@ -65,6 +92,14 @@ export default{
         else
       this.MensajeError();}
       },
+        ConsultarPedidos(){
+            if(this.$route.path!='/ConsultarPedidosView'){
+                if(this.Productos.length!==0)
+                    this.$router.push('/ConsultarPedidosView');
+                else
+                    this.MensajeError();
+            }
+        },
       CerrarSesion(){
         this.$router.push('/')
       },
@@ -117,5 +152,9 @@ export default{
  .letra{
   font-size: 40px;
  }
+ .letra-grande {
+  font-size: 22px;
+}
  
+
 </style>

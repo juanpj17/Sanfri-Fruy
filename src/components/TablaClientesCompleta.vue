@@ -74,6 +74,12 @@
           </b-button>
         </template>
   
+        <template #cell(A)="row">
+          <b-button icon="delete" @click="eliminar(row.item)" variant="danger" size="sm">
+            <i class="bi bi-trash-fill"></i> Eliminar
+          </b-button>
+        </template>
+
         <template #row-details="row">
           <b-card>
             <ul>
@@ -96,24 +102,13 @@
         return {
           items:[],
           fields: [
+          { key: 'id', label: 'ID', },
             { key: 'nombreCompleto', label: 'Nombre Completo', },
             { key: 'tipDoc', label: 'Tipo de documento', class: 'text-center' },
             { key: 'numDoc', label: 'Numero de documento', class: 'text-center' },
             { key: 'email', label: 'Email',  class: 'text-center' },
-            //{ key: 'password', label: 'Password',  class: 'text-center' },
-           // { key: 'estado', label: 'Estado', class: 'text-center' },
-            //{ key: 'direccion', label: 'Direccion', class: 'text-center' },
-            /*{
-             key: 'isActive',
-              label: 'Is Active',
-              formatter: (value, key, item) => {
-                return value ? 'Yes' : 'No'
-              },
-              sortable: true,
-              sortByFormatted: true,
-              filterByFormatted: true
-            }*/,
-            { key: 'Actions', label: 'Informacion' }
+            { key: 'Actions', label: 'Informacion' },
+            { key: 'A', label: 'Eliminar' }
           ],
           totalRows: 1,
           currentPage: 1,
@@ -170,6 +165,15 @@
                 this.items= response.data;                   
               })
             },
+
+        eliminar(product) {
+          const url = 'http://localhost:3000/api/clientes/' + product.id;
+          this.axios.delete(url)
+            .then(response => {
+              console.log(response.data);
+              this.mostrar();
+            })
+        },
       }
     }
   </script>

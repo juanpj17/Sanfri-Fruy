@@ -40,62 +40,66 @@
 
 <script>
     import EncabezadoCompVue from '@/components/EncabezadoComp.vue';
-    import { required, email, minLength} from 'vuelidate/lib/validators';
+    import { required, email, minLength } from 'vuelidate/lib/validators';
+    
     export default {
-   
-       data(){
-           return{
-               email: "",
-               password: "",
-               enviado: false,
-               Cliente:'',
-           }
-       },
-       validations: {
-       
-           email: { required, email },
-           password: { required, minLength: minLength(6) },
-       },
-       methods: {
-           validar(){
-               this.enviado=true;
-               if (this.$v.$invalid) {
-                 return;
-               }
-               else{
-                this.mostrar();
-               }
-           },
-           mostrar:function(){
-            let url='http://localhost:3000/api/clientes/';
-            url=url+this.email;
-            this.axios.get(url)
-              .then(response =>{
-                this.Cliente = response.data;  
-                console.log(this.Cliente);
-                this.redirigir();                 
-              })
-              
-            },
-            redirigir(){
-               if (this.Cliente.length==0){
-                if (this.email==='admin@gmail.com' && this.password==='123456789a'){
-                    this.$router.push('/AdministradorHomeView');
+        data(){
+            return{
+                email: "",
+                password: "",
+                enviado: false,
+                Cliente:'',
+            }
+        },
+        validations: {
+            email: { required, email },
+            password: { required, minLength: minLength(6) },
+        },
+        methods: {
+            validar(){
+                this.enviado = true; 
+                if (this.$v.$invalid) {
+                    return;
                 }
-                else
-                Swal.fire('Usuario no registrado')
+                else{
+                    this.mostrar();
+                }
+            },
+            
+            mostrar:
+                function(){
+                    let url = 'http://localhost:3000/api/clientes/';
+                    url = url + this.email;
+                    this.axios.get(url)
+                        .then(response =>{
+                            this.Cliente = response.data;  
+                            console.log(this.Cliente);
+                            this.redirigir();                 
+                        })     
+                },
+
+            redirigir(){
+                if (this.Cliente.length==0){
+                    if (this.email==='admin@gmail.com' && this.password==='123456789a'){
+                        this.$router.push('/AdministradorHomeView');
+                    }
+                    else{
+                        Swal.fire('Usuario no registrado');
+                    }
                }
-               else{
-                    if (this.Cliente[0].email===this.email&&this.Cliente[0].password==this.password)
-                         {this.$router.push('/ClientesHomeView/'+this.Cliente[0].email);}
-                    else{Swal.fire('El password no coincide con el usuario')}
-                
-            }}
+                else{
+                    if (this.Cliente[0].email===this.email&&this.Cliente[0].password==this.password){
+                         this.$router.push('/ClientesHomeView/'+this.Cliente[0].email);
+                    }
+                    else{
+                        Swal.fire('El password no coincide con el usuario')
+                    }
+                }}
        },
-       components:{
-        EncabezadoCompVue 
-       }
-   }
+        components:{
+            EncabezadoCompVue 
+        }
+    }
 </script>
 
 

@@ -8,7 +8,6 @@
 <script>
 // @ is an alias to /src
 import EncabezadoComp from '@/components/EncabezadoComp.vue'
-import TablaClientesComp from '@/components/TablaClientesComp.vue';
 import CatalogoComp from '@/components/CatalogoComp.vue';
 import ConsultarPerfilComp from '@/components/ConsultarPerfilComp.vue';
 import TablaClientesCompleta from '@/components/TablaClientesCompleta.vue';
@@ -19,7 +18,7 @@ import CarruselComp from '@/components/CarruselComp.vue';
 export default {
   
   name: 'HomeView',
-  components: {EncabezadoComp,TablaClientesComp,CatalogoComp, ConsultarPerfilComp,TablaClientesCompleta,CrearProductoComp,CarruselComp  
+  components: {EncabezadoComp,CatalogoComp, ConsultarPerfilComp,TablaClientesCompleta,CrearProductoComp,CarruselComp  
   },
   methods:{
     BloquearBotonAtras(){
